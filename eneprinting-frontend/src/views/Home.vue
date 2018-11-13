@@ -16,7 +16,7 @@
       </v-layout>
       <h2>{{currentPage}}</h2>
       <div v-if='currentPage == "profile"'>
-        <Profile />
+        <Profile :user="user" />
       </div>
       <div v-if='currentPage == "editCourse"'>
         <EditCourse />
@@ -32,23 +32,37 @@
 import Profile from '@/components/Profile'
 import EditCourse from '@/components/EditCourse'
 import AddFile from '@/components/AddFile'
+import axios from '@/utils/axios'
 import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
   name: 'home',
   state: {
     currentPage: ''
   },
+  data: () => ({
+    user: {}
+  }),
   components: {
     Profile,
     EditCourse,
     AddFile
   },
   methods: {
-    ...mapActions(['changeCurrentPage'])
+    ...mapActions(['changeCurrentPage']),
+    async getProfile () {
+      const { data } = await axios.get(`api/profile/${this.getUserId}`)
+      this.user = data
+    }
   },
   computed: {
-    ...mapGetters(['getCurrentPage']),
+    ...mapGetters([
+      'getCurrentPage',
+      'getUserId'
+    ]),
     ...mapState(['currentPage'])
+  },
+  mounted () {
+    this.getProfile()
   }
 }
 </script>

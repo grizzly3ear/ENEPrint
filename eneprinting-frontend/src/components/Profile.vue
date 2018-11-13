@@ -6,14 +6,14 @@
           <v-text-field
             label='ชื่ออาจารย์'
             disabled
-            value='Somsak'
+            v-model='user.name'
           ></v-text-field>
         </v-flex>
         <v-flex md3>
           <v-text-field
             label='นามสกุลอาจารย์'
             disabled
-            value='Saksom'
+            v-model='user.surname'
           ></v-text-field>
         </v-flex>
       </v-layout>
@@ -22,7 +22,7 @@
           <v-text-field
             label='E-mail'
             disabled
-            value='test@gmail.com'
+            v-model='user.email'
           ></v-text-field>
         </v-flex>
       </v-layout>
@@ -58,6 +58,7 @@
 </template>
 <script>
 export default {
-  name: 'profile'
+  name: 'profile',
+  props: ['user']
 }
 </script>
