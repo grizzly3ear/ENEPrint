@@ -21,3 +21,6 @@ Route::post('/login', 'AuthenticationController@login');
 Route::post('/register', 'AuthenticationController@register');
 Route::get('/profile/{user_id}', 'ProfileController@showProfile');
 
+Route::get('course', 'CourseController@listCourse');
+Route::post('course', 'CourseController@addCourse');
+
