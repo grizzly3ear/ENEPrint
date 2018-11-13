@@ -23,4 +23,5 @@ Route::get('/profile/{user_id}', 'ProfileController@showProfile');
 
 Route::get('course', 'CourseController@listCourse');
 Route::post('course', 'CourseController@addCourse');
+Route::get('course/search', 'CourseController@searchCourse');
 

@@ -18,6 +18,12 @@ class CourseController extends Controller
         return $course;
     }
 
+    public function searchCourse(Request $request){
+        $courses = Course::where('code', 'like', '%'.$request->query('keyword').'%')
+                        ->orWhere('name', 'like', '%'.$request->query('keyword').'%')->get();
+        return $courses;
+    }
+
     public function mapRequestToCourse(Request $request){
         $course = new Course();
         $course->code = $request->code;
