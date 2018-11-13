@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/login', 'AuthenticationController@login');
 Route::post('/register', 'AuthenticationController@register');
+Route::get('/profile/{user_id}', 'ProfileController@showProfile');
 
