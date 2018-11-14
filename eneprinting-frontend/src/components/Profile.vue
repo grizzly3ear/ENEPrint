@@ -31,8 +31,9 @@
           <v-text-field
             label='วิชาที่สอน'
             disabled
-            value='ENE123'
-          ></v-text-field>
+            v-model='course.name'
+          >
+          </v-text-field>
         </v-flex>
       </v-layout>
     </v-content>
