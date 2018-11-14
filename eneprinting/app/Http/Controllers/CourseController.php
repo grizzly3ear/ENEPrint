@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Course;
+use App\InstructorHasCourse;
 
 class CourseController extends Controller
 {
@@ -22,6 +23,12 @@ class CourseController extends Controller
         $courses = Course::where('code', 'like', '%'.$request->query('keyword').'%')
                         ->orWhere('name', 'like', '%'.$request->query('keyword').'%')->get();
         return $courses;
+    }
+
+    public function deleteCourseFromUser($instructor_has_course_id){
+        $course = InstructorHasCourse::find($instructor_has_course_id);
+        $course->delete();
+        return $course->id;
     }
 
     public function mapRequestToCourse(Request $request){
