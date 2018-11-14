@@ -46,7 +46,6 @@ export default {
   methods: {
     ...mapActions(['setUserId']),
     async onLoginPress () {
-      console.log(this.username)
       const { data } = await axios.post('/api/login', {
         username: this.username,
         password: this.password
@@ -54,7 +53,6 @@ export default {
       if (data > 0) {
         this.setUserId(data)
         this.$router.push('/home')
-        console.log(data)
       }
     }
   },

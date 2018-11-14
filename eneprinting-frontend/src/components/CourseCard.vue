@@ -30,10 +30,8 @@ export default {
   methods: {
     ...mapActions(['setCourses']),
     async deleteCourse (id) {
-      const { data } = await axios.delete(`/api/instructor-course/${id}`)
-      console.log('delete ' + data)
+      await axios.delete(`/api/instructor-course/${id}`)
       const newFetch = await axios.get(`/api/profile/${this.getUserId}/course`)
-      console.log(newFetch.data)
       this.setCourses(newFetch.data)
     }
   },
