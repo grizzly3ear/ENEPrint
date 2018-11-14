@@ -8,8 +8,9 @@
         slot="activator"
         color="blue"
         dark
+        @click.native='onSearch("")'
       >
-        Edit
+        Add
       </v-btn>
       <v-card>
         <v-card-title
@@ -23,7 +24,7 @@
             label="Search"
             prepend-inner-icon="search"
             v-model='keyword'
-            @change.native="onSearch()"
+            @change.native="onSearch(keyword)"
           >
           </v-text-field>
         </v-card-title>
@@ -38,7 +39,7 @@
               </v-card>
             </v-flex>
             <v-flex md2>
-              <v-btn color='blue'>
+              <v-btn color='blue' @click='onAddButtonClick(course.id)'>
                 Add
               </v-btn>
             </v-flex>
@@ -59,7 +60,8 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+import axios from '@/utils/axios'
 export default {
   name: 'addCourseModal',
   data: () => ({
@@ -68,16 +70,32 @@ export default {
     allCourse: []
   }),
   methods: {
-    onSearch () {
+    ...mapActions([
+      'setCourses'
+    ]),
+    onSearch (keyword) {
       this.allCourse = this.getAllCourses
       this.allCourse = this.allCourse.filter((course) => {
-        return course.code.toLowerCase().includes(this.keyword) || course.name.toLowerCase().includes(this.keyword)
+        return course.code.toLowerCase().includes(keyword) || course.name.toLowerCase().includes(keyword)
       })
       this.keyword = ''
+    },
+    async onAddButtonClick (courseId) {
+      const { data } = await axios.post(`/api/profile/${this.getUserId}/course`, {
+        course_id: courseId
+      })
+      console.log(data)
+      const newFetch = await axios.get(`/api/profile/${this.getUserId}/course`)
+      console.log(newFetch.data)
+      this.setCourses(newFetch.data)
+      this.dialog = false
     }
   },
   computed: {
-    ...mapGetters(['getAllCourses'])
+    ...mapGetters([
+      'getAllCourses',
+      'getUserId'
+    ])
   },
   mounted () {
     this.allCourse = this.getAllCourses
