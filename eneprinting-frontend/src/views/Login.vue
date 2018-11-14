@@ -51,7 +51,7 @@ export default {
         username: this.username,
         password: this.password
       })
-      if (data) {
+      if (data > 0) {
         this.setUserId(data)
         this.$router.push('/home')
         console.log(data)
