@@ -6,7 +6,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     currentPage: 'profile',
-    userId: ''
+    userId: '',
+    allCourses: [],
+    courses: []
   },
   mutations: {
     changeCurrentPage: (state, page) => {
@@ -14,6 +16,12 @@ export default new Vuex.Store({
     },
     setUserId: (state, id) => {
       state.userId = id
+    },
+    setAllCourses: (state, allCourses) => {
+      state.allCourses = allCourses
+    },
+    setCourses: (state, courses) => {
+      state.courses = courses
     }
   },
   actions: {
@@ -22,6 +30,12 @@ export default new Vuex.Store({
     },
     setUserId: ({ commit }, id) => {
       commit('setUserId', id)
+    },
+    setAllCourses: ({ commit }, allCourses) => {
+      commit('setAllCourses', allCourses)
+    },
+    setCourses: ({ commit }, courses) => {
+      commit('setCourses', courses)
     }
   },
   getters: {
@@ -30,6 +44,12 @@ export default new Vuex.Store({
     },
     getUserId: (state) => {
       return state.userId
+    },
+    getAllCourses: (state) => {
+      return state.allCourses
+    },
+    getCourses: (state) => {
+      return state.courses
     }
   }
 })

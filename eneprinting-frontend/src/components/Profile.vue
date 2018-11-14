@@ -26,28 +26,10 @@
           ></v-text-field>
         </v-flex>
       </v-layout>
-      <v-layout justify-center>
+      <v-layout justify-center v-for='course in getCourses' :key="course.id">
         <v-flex md6>
           <v-text-field
-            label='วิชาที่สอน 1'
-            disabled
-            value='ENE123'
-          ></v-text-field>
-        </v-flex>
-      </v-layout>
-      <v-layout justify-center>
-        <v-flex md6>
-          <v-text-field
-            label='วิชาที่สอน 2'
-            disabled
-            value='ENE123'
-          ></v-text-field>
-        </v-flex>
-      </v-layout>
-      <v-layout justify-center>
-        <v-flex md6>
-          <v-text-field
-            label='วิชาที่สอน 3'
+            label='วิชาที่สอน'
             disabled
             value='ENE123'
           ></v-text-field>
@@ -57,8 +39,18 @@
   </v-app>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'profile',
-  props: ['user']
+  props: ['user'],
+  data: () => ({
+    courses: []
+  }),
+  computed: {
+    ...mapGetters(['getCourses'])
+  },
+  mounted () {
+
+  }
 }
 </script>

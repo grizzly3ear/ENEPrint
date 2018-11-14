@@ -48,21 +48,37 @@ export default {
     AddFile
   },
   methods: {
-    ...mapActions(['changeCurrentPage']),
+    ...mapActions([
+      'changeCurrentPage',
+      'setAllCourses',
+      'setCourses'
+    ]),
     async getProfile () {
       const { data } = await axios.get(`api/profile/${this.getUserId}`)
       this.user = data
+    },
+    async getAllCourse () {
+      const { data } = await axios.get('api/course')
+      this.setAllCourses(data)
+    },
+    async getCourse () {
+      const { data } = await axios.get(`api/profile/${this.getUserId}/course`)
+      this.setCourses(data)
     }
   },
   computed: {
     ...mapGetters([
       'getCurrentPage',
-      'getUserId'
+      'getUserId',
+      'getAllCourses',
+      'getCourses'
     ]),
     ...mapState(['currentPage'])
   },
-  mounted () {
+  async mounted () {
     this.getProfile()
+    this.getAllCourse()
+    this.getCourse()
   }
 }
 </script>
