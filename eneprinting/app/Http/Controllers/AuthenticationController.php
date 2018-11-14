@@ -29,7 +29,7 @@ class AuthenticationController extends Controller
         if (Auth::attempt($credentials)) {
             return Auth::id();
         }else{
-            return null;
+            return -1;
         }
     }
 
@@ -39,7 +39,6 @@ class AuthenticationController extends Controller
         $instructor->surname = $request->surname;
         $instructor->email = $request->email;
         $instructor->instructor_id = $request->instructor_id;
-
         return $instructor;
     }
 
@@ -51,14 +50,4 @@ class AuthenticationController extends Controller
         return $user;
     }
 
-    public function attempt($username, $password){
-        $user = User::where('username', $username)->get()->values()->first();
-        $hashPassword = Hash::make($password);
-        print $user->password. '\n';
-        print $hashPassword;
-        if( $user->password == $hashPassword ){
-            return true;
-        }
-        return false;
-    }
 }
