@@ -1,6 +1,6 @@
 import axios from 'axios'
 const instance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: `${process.env.VUE_APP_AXIOS_URL}`,
   headers: {
     'Access-Control-Allow-Origin': '*'
   }
