@@ -46,7 +46,7 @@ export default {
   methods: {
     ...mapActions(['setUserId']),
     async onLoginPress () {
-      const { data } = await axios.post('/api/login', {
+      const { data } = await axios.post('login', {
         username: this.username,
         password: this.password
       })
