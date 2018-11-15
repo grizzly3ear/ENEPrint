@@ -84,7 +84,7 @@ export default {
       await axios.post(`profile/${this.getUserId}/course`, {
         course_id: courseId
       })
-      const newFetch = await axios.get(`profile/${this.getUserId}/course`)
+      const newFetch = await axios.get(`api/profile/${this.getUserId}/course`)
       this.setCourses(newFetch.data)
       this.dialog = false
     }
