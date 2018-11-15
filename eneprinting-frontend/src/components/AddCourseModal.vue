@@ -81,7 +81,7 @@ export default {
       this.keyword = ''
     },
     async onAddButtonClick (courseId) {
-      await axios.post(`profile/${this.getUserId}/course`, {
+      await axios.post(`api/profile/${this.getUserId}/course`, {
         course_id: courseId
       })
       const newFetch = await axios.get(`api/profile/${this.getUserId}/course`)
