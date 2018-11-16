@@ -12,6 +12,8 @@ Route::post('/register', 'AuthenticationController@register');
 Route::get('/profile/{user_id}', 'ProfileController@showProfile');
 Route::get('/profile/{user_id}/course', 'ProfileController@listCourseByUser');
 Route::post('/profile/{user_id}/course', 'ProfileController@storeCourseToUser');
+Route::post('/profile/{user_id}/upload', 'ProfileController@storeFileToCourse');
+Route::get('/profile/{user_id}/file', 'ProfileController@listFile');
 
 Route::get('course', 'CourseController@listCourse');
 Route::post('course', 'CourseController@addCourse');
