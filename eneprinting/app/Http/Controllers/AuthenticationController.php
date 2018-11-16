@@ -21,7 +21,7 @@ class AuthenticationController extends Controller
         $instructor = $this->mapRequestToInstructor($request);
         $instructor->user_id = $user->id;
         $instructor->save();
-        return $instructor;
+        return $user;
     }
 
     public function login(Request $request){
@@ -38,7 +38,6 @@ class AuthenticationController extends Controller
         $instructor->name = $request->name;
         $instructor->surname = $request->surname;
         $instructor->email = $request->email;
-        $instructor->instructor_id = $request->instructor_id;
         return $instructor;
     }
 
@@ -46,7 +45,7 @@ class AuthenticationController extends Controller
         $user = new User();
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
-        $user->remain_money = $request->remain_money;
+        $user->remain_money = 0;
         return $user;
     }
 
