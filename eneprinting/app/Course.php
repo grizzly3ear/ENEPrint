@@ -15,4 +15,8 @@ class Course extends Model
     public function students(){
         return $this->belongsToMany('App\Student', 'course_plan', 'course_id', 'student_id')->withPivot('id');
     }
+
+    public function documents(){
+        return $this->hasMany('App\Document', 'course_id');
+    }
 }

@@ -16,5 +16,9 @@ class Instructor extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
+    public function documents(){
+        return $this->hasMany('App\Document', 'instructor_id');
+    }
+
 
 }
