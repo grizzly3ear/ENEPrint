@@ -67,11 +67,13 @@ export default {
   }),
   component: {},
   methods: {
-    ...mapActions(['setUserId']),
+    ...mapActions([
+      'setUserId',
+      'setLoading'
+    ]),
     async onRegister () {
-      console.log('in progress...')
+      this.setLoading(true)
       if (this.password === this.confirmPassword && this.password.length > 7) {
-        console.log('pass')
         const { data } = await axios.post('api/register', {
           username: this.username,
           password: this.password,
@@ -82,7 +84,9 @@ export default {
         if (data) {
           this.setUserId(data.id)
           this.$router.push('/home')
+          this.setLoading(false)
         }
+        this.setLoading(false)
       }
     }
   }

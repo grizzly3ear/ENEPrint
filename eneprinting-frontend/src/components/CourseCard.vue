@@ -28,11 +28,16 @@ export default {
     'index'
   ],
   methods: {
-    ...mapActions(['setCourses']),
+    ...mapActions([
+      'setCourses',
+      'setLoading'
+    ]),
     async deleteCourse (id) {
+      this.setLoading(true)
       await axios.delete(`api/instructor-course/${id}`)
       const newFetch = await axios.get(`api/profile/${this.getUserId}/course`)
       this.setCourses(newFetch.data)
+      this.setLoading(false)
     }
   },
   computed: {

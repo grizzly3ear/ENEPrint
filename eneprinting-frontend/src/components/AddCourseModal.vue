@@ -71,7 +71,8 @@ export default {
   }),
   methods: {
     ...mapActions([
-      'setCourses'
+      'setCourses',
+      'setLoading'
     ]),
     onSearch (keyword) {
       this.allCourse = this.getAllCourses
@@ -81,12 +82,14 @@ export default {
       this.keyword = ''
     },
     async onAddButtonClick (courseId) {
+      this.setLoading(true)
       await axios.post(`api/profile/${this.getUserId}/course`, {
         course_id: courseId
       })
       const newFetch = await axios.get(`api/profile/${this.getUserId}/course`)
       this.setCourses(newFetch.data)
       this.dialog = false
+      this.setLoading(false)
     }
   },
   computed: {

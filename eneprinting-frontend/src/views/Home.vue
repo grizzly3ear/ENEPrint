@@ -51,9 +51,12 @@ export default {
     ...mapActions([
       'changeCurrentPage',
       'setAllCourses',
-      'setCourses'
+      'setCourses',
+      'setFiles',
+      'setLoading'
     ]),
     async getProfile () {
+      this.setLoading(true)
       const { data } = await axios.get(`api/profile/${this.getUserId}`)
       this.user = data
     },
@@ -64,6 +67,11 @@ export default {
     async getCourse () {
       const { data } = await axios.get(`api/profile/${this.getUserId}/course`)
       this.setCourses(data)
+    },
+    async getFile () {
+      const { data } = await axios.get(`api/profile/${this.getUserId}/file`)
+      this.setFiles(data.data)
+      this.setLoading(false)
     }
   },
   computed: {
@@ -79,6 +87,7 @@ export default {
     this.getProfile()
     this.getAllCourse()
     this.getCourse()
+    this.getFile()
   }
 }
 </script>
