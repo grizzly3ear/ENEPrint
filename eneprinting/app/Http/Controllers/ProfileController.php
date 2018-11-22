@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\User;
 use App\Course;
 use App\Document;
+
+use App\Http\Resources\FileResource;
 
 class ProfileController extends Controller
 {
@@ -27,23 +30,27 @@ class ProfileController extends Controller
     }
 
     public function storeFileToCourse(Request $request, $user_id){
-        $document = $this->mapRequestToDocument($request);
         $instructor = $this->showProfile($user_id);
+        $document = $this->mapRequestToDocument($request);
         $document->instructor_id = $instructor->id;
         $file = $request->file('file');
-        $path = $file->storeAs($instructor->id.'-file', $request->file_name.'.'.$file->extension());
+        $path = $file->storeAs($instructor->id.'-file', $request->file_name);
         $document->file_name = $request->file_name;
         $document->file_path = $path;
         $document->save();
-        return $document;
+        return new FileResource($document);
     }
 
     public function listFile($user_id){
         $instructor = User::find($user_id)->instructorProfile;
         $documents = $instructor->documents;
-        return $documents;
+        return FileResource::collection($documents);
     }
 
+    public function downloadFile(Request $request){
+        $file_path = $request->query('file_name');
+        return Storage::download($file_path);
+    }
 
     public function mapRequestToDocument(Request $request){
         $document = new Document();

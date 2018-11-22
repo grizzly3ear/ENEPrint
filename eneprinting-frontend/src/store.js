@@ -8,7 +8,9 @@ export default new Vuex.Store({
     currentPage: 'profile',
     userId: '',
     allCourses: [],
-    courses: []
+    courses: [],
+    files: [],
+    loading: false
   },
   mutations: {
     changeCurrentPage: (state, page) => {
@@ -22,6 +24,12 @@ export default new Vuex.Store({
     },
     setCourses: (state, courses) => {
       state.courses = courses
+    },
+    setFiles: (state, files) => {
+      state.files = files
+    },
+    setLoading: (state, loading) => {
+      state.loading = loading
     }
   },
   actions: {
@@ -36,6 +44,12 @@ export default new Vuex.Store({
     },
     setCourses: ({ commit }, courses) => {
       commit('setCourses', courses)
+    },
+    setFiles: ({ commit }, files) => {
+      commit('setFiles', files)
+    },
+    setLoading: ({ commit }, loading) => {
+      commit('setLoading', loading)
     }
   },
   getters: {
@@ -50,6 +64,12 @@ export default new Vuex.Store({
     },
     getCourses: (state) => {
       return state.courses
+    },
+    getFiles: (state) => {
+      return state.files
+    },
+    getLoading: (state) => {
+      return state.loading
     }
   }
 })
