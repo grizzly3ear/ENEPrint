@@ -19,6 +19,7 @@
                     label="Login"
                     type="text"
                     :error='error'
+                    @keypress.13='onLoginPress'
                   >
                   </v-text-field>
                   <v-text-field
@@ -29,6 +30,7 @@
                     label="Password"
                     type="password"
                     :error='error'
+                    @keypress.13='onLoginPress'
                   >
                   </v-text-field>
                 </v-form>
@@ -64,6 +66,12 @@ export default {
     ...mapActions(['setUserId']),
     async onLoginPress () {
       this.loading = true
+      if (this.username.trim().length === 0 || this.password.trim().length === 0) {
+        this.loading = false
+        this.error = true
+        return
+      }
+
       const { data } = await axios.post('api/login', {
         username: this.username,
         password: this.password
