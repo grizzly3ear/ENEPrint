@@ -26,10 +26,10 @@
           ></v-text-field>
         </v-flex>
       </v-layout>
-      <v-layout justify-center v-for='course in getCourses' :key="course.id">
+      <v-layout justify-center v-for='(course) in getCourses' :key="course.id">
         <v-flex md6>
           <v-text-field
-            label='วิชาที่สอน'
+            v-bind:label="$t(`${course.code} ชั้นปีที่ ${course.year}`)"
             disabled
             v-model='course.name'
           >
@@ -49,6 +49,11 @@ export default {
   }),
   computed: {
     ...mapGetters(['getCourses'])
+  },
+  methods: {
+    $t (value) {
+      return value
+    }
   },
   mounted () {
 

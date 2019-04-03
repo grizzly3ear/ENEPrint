@@ -2,7 +2,7 @@
   <v-layout justify-center align-start>
     <v-flex md5>
       <v-text-field
-        label='วิชาที่สอน'
+        v-bind:label="$t(`${course.code} ชั้นปีที่ ${course.year}`)"
         disabled
         v-model='course.name'
       ></v-text-field>
@@ -38,6 +38,9 @@ export default {
       const newFetch = await axios.get(`api/profile/${this.getUserId}/course`)
       this.setCourses(newFetch.data)
       this.setLoading(false)
+    },
+    $t (value) {
+      return value
     }
   },
   computed: {
