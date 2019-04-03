@@ -37,6 +37,7 @@ class ProfileController extends Controller
         $path = $file->storeAs($instructor->id.'-file', $request->file_name);
         $document->file_name = $request->file_name;
         $document->file_path = $path;
+        $document->file_type = $request->file_type;
         $document->save();
         return new FileResource($document);
     }
