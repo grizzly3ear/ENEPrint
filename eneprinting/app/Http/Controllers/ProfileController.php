@@ -52,6 +52,12 @@ class ProfileController extends Controller
         return Storage::download($file_path);
     }
 
+    public function deleteFile($file_id) {
+        $document = Document::find($file_id);
+        $document->delete();
+        return $file_id;
+    }
+
     public function mapRequestToDocument(Request $request){
         $document = new Document();
         $document->course_id = $request->course_id;
