@@ -20,6 +20,7 @@ Route::post('course', 'CourseController@addCourse');
 Route::get('course/search', 'CourseController@searchCourse');
 
 Route::delete('instructor-course/{instructor_has_course_id}', 'CourseController@deleteCourseFromUser');
+Route::delete('instructor-course/{instructor_has_course_id}/with-file', 'CourseController@deleteCourseFromUserWithFile');
 
 Route::get('file', 'ProfileController@downloadFile');
 Route::delete('file/{file_id}', 'ProfileController@deleteFile');
