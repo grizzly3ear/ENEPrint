@@ -19,6 +19,7 @@ class FileResource extends JsonResource
             'file_name' => $this->file_name,
             'file_path' => $this->file_path,
             'id' => $this->id,
+            'file_type' => $this->file_type,
             'created_at' => str_before($this->created_at, ' ')
         ];
     }
