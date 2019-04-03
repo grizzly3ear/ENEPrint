@@ -19,6 +19,7 @@
 <script>
 import axios from '@/utils/axios'
 import { mapActions, mapGetters } from 'vuex'
+import swal from 'sweetalert'
 export default {
   name: 'addCourseCard',
   components: {
@@ -33,11 +34,45 @@ export default {
       'setLoading'
     ]),
     async deleteCourse (id) {
-      this.setLoading(true)
-      await axios.delete(`api/instructor-course/${id}`)
-      const newFetch = await axios.get(`api/profile/${this.getUserId}/course`)
-      this.setCourses(newFetch.data)
-      this.setLoading(false)
+      swal({
+        title: 'ลบวิชาที่สอน',
+        text: 'แน่ใจหรือไม่ที่จะลบวิชานี้',
+        icon: 'warning',
+        buttons: {
+          deleteSubjectFile: {
+            text: 'delete subject&files',
+            value: 'deleteSubjectFile'
+          },
+          deleteSubject: {
+            text: 'delete subject',
+            value: 'deleteSubject'
+          },
+          cancel: 'cancel'
+        },
+        dangerMode: true
+      }).then((value) => {
+        if (value === 'deleteSubject') {
+          this.setLoading(true)
+          axios.delete(`api/instructor-course/${id}`).then(() => {
+            axios.get(`api/profile/${this.getUserId}/course`).then(({ data }) => {
+              this.setCourses(data)
+              swal('ลบวิชาที่สอน', 'ลบวิชาเรียบร้อย', 'success')
+              this.setLoading(false)
+            })
+          })
+        } else if (value === 'deleteSubjectFile') {
+          this.setLoading(true)
+          axios.delete(`api/instructor-course/${id}/with-file`).then(() => {
+            axios.get(`api/profile/${this.getUserId}/course`).then(({ data }) => {
+              this.setCourses(data)
+              swal('ลบวิชาที่สอน', 'ลบวิชาและไฟล์เรียบร้อย', 'success')
+              this.setLoading(false)
+            })
+          })
+        } else {
+          swal('ลบวิชาที่สอน', 'ยกเลิกการลบวิชาที่สอน', 'success')
+        }
+      })
     },
     $t (value) {
       return value

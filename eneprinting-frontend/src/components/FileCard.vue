@@ -9,7 +9,7 @@
     </v-flex>
     <v-flex md2>
       <v-text-field
-        label='ชื่อไฟล์ upload ตอนไหนด้วย'
+        v-bind:label='$t(`${file.file_type}`)'
         v-model='file.file_name'
         disabled
       ></v-text-field>
@@ -38,6 +38,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import axios from '@/utils/axios'
+import swal from 'sweetalert'
 export default {
   name: 'fileCard',
   props: [
@@ -54,12 +55,29 @@ export default {
       this.setLoading(false)
     },
     async deleteFile (id) {
-      this.setLoading(true)
-      await axios.delete(`http://localhost:8000/api/file/${id}`)
-      const newFetch = await axios.get(`api/profile/${this.getUserId}/file`)
-      console.log(newFetch.data)
-      this.setFiles(newFetch.data.data)
-      this.setLoading(false)
+      swal({
+        title: 'ลบไฟล์',
+        text: 'แน่ใจหรือไม่ที่จะลบไฟล์นี้',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true
+      }).then((willDelete) => {
+        if (willDelete) {
+          this.setLoading(true)
+          axios.delete(`api/file/${id}`).then(() => {
+            axios.get(`api/profile/${this.getUserId}/file`).then(({ data }) => {
+              console.log(data.data)
+              this.setFiles(data.data)
+              this.setLoading(false)
+              swal('ลบไฟล์เรียบร้อย', {
+                icon: 'success'
+              })
+            })
+          })
+        } else {
+          swal('ยกเลิกการลบไฟล์')
+        }
+      })
     },
     $t (value) {
       return value
