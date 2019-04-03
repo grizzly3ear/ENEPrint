@@ -37,7 +37,8 @@
           :items="getCourses"
           label="Choose course"
           item-text='name'
-          item-value='id'
+          item-value='name'
+          return-object
           v-model='course'
         ></v-overflow-btn>
         <v-divider></v-divider>
@@ -87,11 +88,12 @@ export default {
       }
     },
     async onSubmitFile () {
+      // console.log(this.course)
       this.setLoading(true)
       let formData = new FormData()
       this.fileObject = this.$refs.input.files[0]
       formData.append('file', this.fileObject)
-      formData.append('course_id', this.course)
+      formData.append('course_id', this.course.id)
       formData.append('file_name', this.fileName)
       await axios.post(`api/profile/${this.getUserId}/upload`,
         formData, {
