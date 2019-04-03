@@ -84,9 +84,17 @@ export default {
         swal('ผลการสมัคร', 'กรุณากรอกข้อมูลให้ครบถ้วน', 'error')
         return
       }
-      if (this.password === this.confirmPassword &&
-          this.password.length > 7 &&
-          this.username.length > 7) {
+      if (this.username.trim().length < 8) {
+        swal('ผลการสมัคร', 'username ต้องมีขนาดขั้นต่ำ 8 ตัวอักษร', 'error')
+        this.setLoading(false)
+        return
+      }
+      if (this.password.trim().length < 8) {
+        swal('ผลการสมัคร', 'password ต้องมีขนาดขั้นต่ำ 8 ตัวอักษร', 'error')
+        this.setLoading(false)
+        return
+      }
+      if (this.password === this.confirmPassword) {
         const { data } = await axios.post('api/register', {
           username: this.username,
           password: this.password,
