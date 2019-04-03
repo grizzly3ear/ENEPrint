@@ -41,6 +41,12 @@
           return-object
           v-model='course'
         ></v-overflow-btn>
+        <v-overflow-btn
+          :items="fileType"
+          label="Choose course"
+          return-object
+          v-model='fileTypeSelect'
+        ></v-overflow-btn>
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -67,7 +73,12 @@ export default {
       fileName: '',
       filePath: '',
       fileObject: {},
-      course: ''
+      course: '',
+      fileType: [
+        'lecture',
+        'test'
+      ],
+      fileTypeSelect: ''
     }
   },
   methods: {
@@ -89,12 +100,14 @@ export default {
     },
     async onSubmitFile () {
       // console.log(this.course)
+      // console.log(this.fileTypeSelect)
       this.setLoading(true)
       let formData = new FormData()
       this.fileObject = this.$refs.input.files[0]
       formData.append('file', this.fileObject)
       formData.append('course_id', this.course.id)
       formData.append('file_name', this.fileName)
+      formData.append('file_type', this.fileTypeSelect)
       await axios.post(`api/profile/${this.getUserId}/upload`,
         formData, {
           headers: {
