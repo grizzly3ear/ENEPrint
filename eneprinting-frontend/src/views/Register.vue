@@ -4,7 +4,7 @@
       <v-layout row wrap align-center fill-height>
         <v-flex offset-md4 md4>
           <v-text-field
-            label='Username'
+            label='Username ขั้นต่ำ 8 ตัว'
             v-model='username'
           ></v-text-field>
         </v-flex>
@@ -30,7 +30,7 @@
         </v-flex>
         <v-flex offset-md4 md4>
           <v-text-field
-            label='Password'
+            label='Password ขั้นต่ำ 8 ตัว'
             v-model='password'
             type='password'
           ></v-text-field>
@@ -55,6 +55,7 @@
 <script>
 import axios from '@/utils/axios'
 import { mapActions } from 'vuex'
+import swal from 'sweetalert'
 export default {
   name: 'register',
   data: () => ({
@@ -73,7 +74,19 @@ export default {
     ]),
     async onRegister () {
       this.setLoading(true)
-      if (this.password === this.confirmPassword && this.password.length > 7) {
+      if (this.username.trim() === '' ||
+          this.name.trim() === '' ||
+          this.surname.trim() === '' ||
+          this.email.trim() === '' ||
+          this.password.trim() === '' ||
+          this.confirmPassword.trim() === '') {
+        this.setLoading(false)
+        swal('ผลการสมัคร', 'กรุณากรอกข้อมูลให้ครบถ้วน', 'error')
+        return
+      }
+      if (this.password === this.confirmPassword &&
+          this.password.length > 7 &&
+          this.username.length > 7) {
         const { data } = await axios.post('api/register', {
           username: this.username,
           password: this.password,
@@ -86,6 +99,9 @@ export default {
           this.$router.push('/home')
           this.setLoading(false)
         }
+        this.setLoading(false)
+      } else {
+        swal('ผลการสมัคร', 'password และ confirm password ไม่ตรงกัน', 'error')
         this.setLoading(false)
       }
     }
