@@ -18,7 +18,8 @@ class FileResource extends JsonResource
             'course' => $this->course,
             'file_name' => $this->file_name,
             'file_path' => $this->file_path,
-            'id' => $this->id
+            'id' => $this->id,
+            'created_at' => str_before($this->created_at, ' ')
         ];
     }
 }
