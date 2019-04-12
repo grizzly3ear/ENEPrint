@@ -86,7 +86,7 @@ export default {
         course_id: courseId
       })
       const newFetch = await axios.get(`api/profile/${this.getUserId}/course`)
-      this.setCourses(newFetch.data)
+      this.setCourses(newFetch.data.data)
       this.dialog = false
       this.setLoading(false)
     }

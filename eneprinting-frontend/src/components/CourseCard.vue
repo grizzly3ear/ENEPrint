@@ -31,7 +31,8 @@ export default {
   methods: {
     ...mapActions([
       'setCourses',
-      'setLoading'
+      'setLoading',
+      'setFiles'
     ]),
     async deleteCourse (id) {
       swal({
@@ -55,7 +56,7 @@ export default {
           this.setLoading(true)
           axios.delete(`api/instructor-course/${id}`).then(() => {
             axios.get(`api/profile/${this.getUserId}/course`).then(({ data }) => {
-              this.setCourses(data)
+              this.setCourses(data.data)
               swal('ลบวิชาที่สอน', 'ลบวิชาเรียบร้อย', 'success')
               this.setLoading(false)
             })
@@ -64,9 +65,12 @@ export default {
           this.setLoading(true)
           axios.delete(`api/instructor-course/${id}/with-file`).then(() => {
             axios.get(`api/profile/${this.getUserId}/course`).then(({ data }) => {
-              this.setCourses(data)
+              this.setCourses(data.data)
               swal('ลบวิชาที่สอน', 'ลบวิชาและไฟล์เรียบร้อย', 'success')
-              this.setLoading(false)
+              axios.get(`api/profile/${this.getUserId}/file`).then((files) => {
+                this.setFiles(files.data.data)
+                this.setLoading(false)
+              })
             })
           })
         }
