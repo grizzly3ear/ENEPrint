@@ -41,14 +41,14 @@ export default {
         icon: 'warning',
         buttons: {
           deleteSubjectFile: {
-            text: 'delete subject&files',
+            text: 'Yes and delete files',
             value: 'deleteSubjectFile'
           },
           deleteSubject: {
-            text: 'delete subject',
+            text: 'Yes but keep files',
             value: 'deleteSubject'
           },
-          cancel: 'cancel'
+          cancel: 'Cancel'
         },
         dangerMode: true
       }).then((value) => {
