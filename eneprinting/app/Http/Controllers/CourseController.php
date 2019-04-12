@@ -39,7 +39,7 @@ class CourseController extends Controller
         $instructor = Instructor::find($instructor_id);
         $documents = $instructor->documents;
         foreach ($documents as $document) {
-            if ($document->instructor_id == $course_id) {
+            if ($document->course_id == $course_id) {
                 $document->delete();
             }
         }
