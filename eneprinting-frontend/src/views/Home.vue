@@ -14,15 +14,30 @@
           </v-flex>
         </v-layout>
       </v-layout>
-      <h2>{{currentPage}}</h2>
-      <div v-if='currentPage == "profile"'>
-        <Profile :user="user" />
-      </div>
-      <div v-if='currentPage == "editCourse"'>
-        <EditCourse />
-      </div>
-      <div v-if='currentPage == "addFile"'>
-        <AddFile />
+      <v-layout>
+        <v-flex md3></v-flex>
+        <v-flex md5>
+          <h2 v-if='currentPage == "profile"'>
+            Profile
+          </h2>
+          <h2 v-if='currentPage == "editCourse"'>
+            Course
+          </h2>
+          <h2 v-if='currentPage == "addFile"'>
+            Document
+          </h2>
+        </v-flex>
+      </v-layout>
+      <div style='margin-top: -50px'>
+        <div v-if='currentPage == "profile"'>
+          <Profile :user="user" />
+        </div>
+        <div v-if='currentPage == "editCourse"'>
+          <EditCourse />
+        </div>
+        <div v-if='currentPage == "addFile"'>
+          <AddFile />
+        </div>
       </div>
     </v-content>
   </v-app>
@@ -66,10 +81,11 @@ export default {
     },
     async getCourse () {
       const { data } = await axios.get(`api/profile/${this.getUserId}/course`)
-      this.setCourses(data)
+      this.setCourses(data.data)
     },
     async getFile () {
       const { data } = await axios.get(`api/profile/${this.getUserId}/file`)
+      console.log(data)
       this.setFiles(data.data)
       this.setLoading(false)
     }
