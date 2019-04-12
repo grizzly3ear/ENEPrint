@@ -35,12 +35,13 @@
         </v-card-text>
         <v-overflow-btn
           :items="getCourses"
-          item-text="name"
+          item-text="full_name"
           return-object
           v-model='course'
         ></v-overflow-btn>
         <v-overflow-btn
           :items="fileType"
+          placeholder='File Type'
           return-object
           v-model='fileTypeSelect'
         ></v-overflow-btn>
