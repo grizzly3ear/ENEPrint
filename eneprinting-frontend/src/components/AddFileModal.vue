@@ -35,15 +35,12 @@
         </v-card-text>
         <v-overflow-btn
           :items="getCourses"
-          label="Choose course"
-          item-text='name'
-          item-value='name'
+          item-text="name"
           return-object
           v-model='course'
         ></v-overflow-btn>
         <v-overflow-btn
           :items="fileType"
-          label="Choose course"
           return-object
           v-model='fileTypeSelect'
         ></v-overflow-btn>
