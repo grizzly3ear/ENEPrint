@@ -10,6 +10,7 @@ use App\Course;
 use App\Document;
 
 use App\Http\Resources\FileResource;
+use App\Http\Resources\CourseResource;
 
 class ProfileController extends Controller
 {
@@ -26,7 +27,7 @@ class ProfileController extends Controller
 
     public function listCourseByUser($user_id){
         $courses = User::find($user_id)->instructorProfile->courses;
-        return $courses;
+        return CourseResource::collection($courses);
     }
 
     public function storeFileToCourse(Request $request, $user_id){
