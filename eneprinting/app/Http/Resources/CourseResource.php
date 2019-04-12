@@ -26,7 +26,8 @@ class CourseResource extends JsonResource
             'name' => $this->name,
             'type' => $this->type,
             'year' => $this->year,
-            'full_name' => $this->code . ' ' . $this->name
+            'full_name' => $this->code . ' ' . $this->name,
+            'pivot' => $this->pivot
         ];
     }
 }
