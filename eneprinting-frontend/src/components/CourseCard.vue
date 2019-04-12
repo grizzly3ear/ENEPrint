@@ -69,8 +69,6 @@ export default {
               this.setLoading(false)
             })
           })
-        } else {
-          swal('ลบวิชาที่สอน', 'ยกเลิกการลบวิชาที่สอน', 'success')
         }
       })
     },
