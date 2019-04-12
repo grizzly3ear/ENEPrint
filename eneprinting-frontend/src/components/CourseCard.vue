@@ -66,10 +66,10 @@ export default {
           axios.delete(`api/instructor-course/${id}/with-file`).then(() => {
             axios.get(`api/profile/${this.getUserId}/course`).then(({ data }) => {
               this.setCourses(data.data)
-              swal('ลบวิชาที่สอน', 'ลบวิชาและไฟล์เรียบร้อย', 'success')
               axios.get(`api/profile/${this.getUserId}/file`).then((files) => {
                 this.setFiles(files.data.data)
                 this.setLoading(false)
+                swal('ลบวิชาที่สอน', 'ลบวิชาและไฟล์เรียบร้อย', 'success')
               })
             })
           })
