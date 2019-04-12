@@ -2,12 +2,6 @@
   <v-app>
     <v-content>
       <v-layout justify-center wrap>
-        <v-flex md5>
-          <v-text-field
-            label='เลือกไฟล์'
-            disabled
-          ></v-text-field>
-        </v-flex>
         <v-flex md1>
           <AddFileModal />
         </v-flex>

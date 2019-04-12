@@ -2,12 +2,6 @@
   <v-app>
     <v-content>
       <v-layout justify-center row>
-        <v-flex md5>
-          <v-text-field
-            label='วิชาที่สอน'
-            disabled
-          ></v-text-field>
-        </v-flex>
         <v-flex md1>
           <AddCourseModal />
         </v-flex>
