@@ -10,7 +10,7 @@
         dark
         @click.native='onSearch("")'
       >
-        Add
+        Add Course
       </v-btn>
       <v-card>
         <v-card-title
@@ -31,15 +31,14 @@
         <v-card-text v-for="course in allCourse" :key="course.id">
           <v-layout row>
             <v-flex md10>
-              <v-card>
-                <v-text-field
-                  :label='course.code'
-                  v-model='course.name'
-                ></v-text-field>
-              </v-card>
+              <v-text-field
+                :label='course.code'
+                v-model='course.name'
+                disabled
+              ></v-text-field>
             </v-flex>
             <v-flex md2>
-              <v-btn color='blue' @click='onAddButtonClick(course.id)'>
+              <v-btn dark color='blue' @click='onAddButtonClick(course.id)'>
                 Add
               </v-btn>
             </v-flex>
