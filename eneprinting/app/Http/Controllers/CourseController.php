@@ -35,10 +35,13 @@ class CourseController extends Controller
     public function deleteCourseFromUserWithFile($instructor_has_course_id){
         $course = InstructorHasCourse::find($instructor_has_course_id);
         $instructor_id = $course->instructor_id;
+        $course_id = $course->course_id;
         $instructor = Instructor::find($instructor_id);
         $documents = $instructor->documents;
         foreach ($documents as $document) {
-            $document->delete();
+            if ($document->instructor_id == $course_id) {
+                $document->delete();
+            }
         }
         $course->delete();
         return $course->id;
