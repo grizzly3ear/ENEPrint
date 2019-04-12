@@ -28,8 +28,8 @@
     </v-flex>
     <v-flex md1>
       <v-btn dark color='red' @click='deleteFile(file.id)'>
-        <v-layout>
-          <v-icon dark right>block</v-icon>
+        <v-layout justify-center>
+          <v-icon dark>delete</v-icon>
         </v-layout>
       </v-btn>
     </v-flex>

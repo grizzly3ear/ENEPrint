@@ -9,8 +9,8 @@
     </v-flex>
     <v-flex md1>
       <v-btn color="red" dark @click='deleteCourse(course.pivot.id)'>
-        <v-layout>
-          <v-icon dark right>block</v-icon>
+        <v-layout justify-center>
+          <v-icon dark>delete</v-icon>
         </v-layout>
       </v-btn>
     </v-flex>
