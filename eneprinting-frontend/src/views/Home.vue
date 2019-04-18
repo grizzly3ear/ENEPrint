@@ -3,7 +3,6 @@
     <v-content>
       <v-layout>
         <v-flex md2>
-          <v-img src='https://picsum.photos/510/300?random' alt='profile'></v-img>
         </v-flex>
         <v-layout align-center justify-center>
           <v-flex md6>
@@ -11,6 +10,11 @@
             <v-btn v-on:click.native='changeCurrentPage("editCourse")'>Edit Courses</v-btn>
             <v-btn v-on:click.native='changeCurrentPage("addFile")'>Add files</v-btn>
             <router-link to="/"><v-btn>Logout</v-btn></router-link>
+            <v-progress-circular
+              indeterminate
+              color="primary"
+              v-show="getLoading"
+            ></v-progress-circular>
           </v-flex>
         </v-layout>
       </v-layout>
@@ -28,7 +32,7 @@
           </h2>
         </v-flex>
       </v-layout>
-      <div style='margin-top: -50px'>
+      <div style='margin-top: 20px'>
         <div v-if='currentPage == "profile"'>
           <Profile :user="user" />
         </div>
@@ -95,7 +99,8 @@ export default {
       'getCurrentPage',
       'getUserId',
       'getAllCourses',
-      'getCourses'
+      'getCourses',
+      'getLoading'
     ]),
     ...mapState(['currentPage'])
   },
