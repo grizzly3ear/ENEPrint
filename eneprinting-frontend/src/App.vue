@@ -1,16 +1,16 @@
 <template>
   <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>ENE Printing </span>
-        <v-progress-circular
-          indeterminate
-          v-show='getLoading'
-          color="primary"
-        ></v-progress-circular>
-      </v-toolbar-title>
-    </v-toolbar>
-      <router-view></router-view>
+    <v-container>
+      <v-img
+        v-bind:src="`${image}`"
+        width='100%'
+      >
+      </v-img>
+    </v-container>
+      <div
+      >
+        <router-view></router-view>
+      </div>
   </v-app>
 </template>
 
@@ -22,7 +22,7 @@ export default {
   },
   data () {
     return {
-      //
+      image: require('./assets/banner.png')
     }
   },
   computed: {
