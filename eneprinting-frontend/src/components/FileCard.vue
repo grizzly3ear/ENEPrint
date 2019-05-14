@@ -51,7 +51,7 @@ export default {
     ]),
     handleDownload (path) {
       this.setLoading(true)
-      window.open(`http://localhost:8000/api/file?file_name=${path}`)
+      window.open(`${path}`)
       this.setLoading(false)
     },
     async deleteFile (id) {
