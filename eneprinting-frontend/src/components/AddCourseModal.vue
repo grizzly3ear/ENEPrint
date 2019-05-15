@@ -60,6 +60,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Swal2 from 'sweetalert2'
 import axios from '@/utils/axios'
 export default {
   name: 'addCourseModal',
@@ -89,6 +90,13 @@ export default {
       this.setCourses(newFetch.data.data)
       this.dialog = false
       this.setLoading(false)
+      Swal2.fire({
+        position: 'top-right',
+        title: 'เพิ่มวิชา',
+        text: 'เพิ่มวิชาเสร็จสิ้น',
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
   },
   computed: {
