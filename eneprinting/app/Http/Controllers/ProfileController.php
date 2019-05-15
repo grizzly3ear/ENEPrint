@@ -24,7 +24,12 @@ class ProfileController extends Controller
     public function storeCourseToUser(Request $request, $user_id){
         $instructor = User::find($user_id)->instructorProfile;
         $course = Course::find($request->course_id);
-        $instructor->courses()->save($course);
+        $exist = $instructor->courses()->where('course_id', $request->course_id)->exists();
+
+        if (!$exist) {
+            $instructor->courses()->save($course);
+        }
+
         return $course;
     }
 
