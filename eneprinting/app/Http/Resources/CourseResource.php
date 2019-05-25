@@ -27,7 +27,8 @@ class CourseResource extends JsonResource
             'type' => $this->type,
             'year' => $this->year,
             'full_name' => $this->code . ' ' . $this->name,
-            'pivot' => $this->pivot
+            'pivot' => $this->pivot,
+            'documents' => FileResource::collection($this->documents)
         ];
     }
 }

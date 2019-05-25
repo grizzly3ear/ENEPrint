@@ -17,6 +17,7 @@ Route::get('/profile/{user_id}/file', 'ProfileController@listFile');
 
 Route::get('course', 'CourseController@listCourse');
 Route::post('course', 'CourseController@addCourse');
+Route::get('course/{course_id}/file', 'CourseController@getFileFromCourse');
 Route::get('course/search', 'CourseController@searchCourse');
 
 Route::delete('instructor-course/{instructor_has_course_id}', 'CourseController@deleteCourseFromUser');

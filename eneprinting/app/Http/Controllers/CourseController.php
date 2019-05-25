@@ -8,6 +8,8 @@ use App\Course;
 use App\InstructorHasCourse;
 use App\Instructor;
 
+use App\Http\Resources\CourseResource;
+
 class CourseController extends Controller
 {
     public function listCourse(){
@@ -45,6 +47,11 @@ class CourseController extends Controller
         }
         $course->delete();
         return $course->id;
+    }
+
+    public function getFileFromCourse($course_id) {
+        $course = Course::find($course_id);
+        return new CourseResource($course);
     }
 
     public function mapRequestToCourse(Request $request){
