@@ -12,20 +12,21 @@ use App\Document;
 
 use App\Http\Resources\FileResource;
 use App\Http\Resources\CourseResource;
+use App\Http\Resources\UserResource;
 
 class ProfileController extends Controller
 {
     private $storageDisk = 's3';
 
     public function showProfile($user_id){
-        return User::find($user_id)->instructorProfile;
+        return new UserResource(User::find($user_id));
     }
-    
+
     public function updateRemainMoney(Request $request, $user_id) {
         $user = User::find($user_id);
         $user->remain_money = $request->remain_money;
         $user->save();
-        
+
         return $user->remain_money;
     }
 
