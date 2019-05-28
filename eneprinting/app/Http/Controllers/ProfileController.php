@@ -20,6 +20,14 @@ class ProfileController extends Controller
     public function showProfile($user_id){
         return User::find($user_id)->instructorProfile;
     }
+    
+    public function updateRemainMoney(Request $request, $user_id) {
+        $user = User::find($user_id);
+        $user->remain_money = $request->remain_money;
+        $user->save();
+        
+        return $user->remain_money;
+    }
 
     public function storeCourseToUser(Request $request, $user_id){
         $instructor = User::find($user_id)->instructorProfile;
