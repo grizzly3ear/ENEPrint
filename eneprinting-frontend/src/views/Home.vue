@@ -77,7 +77,8 @@ export default {
     async getProfile () {
       this.setLoading(true)
       const { data } = await axios.get(`api/profile/${this.getUserId}`)
-      this.user = data
+      this.user = data.data
+      console.log(data.data)
     },
     async getAllCourse () {
       const { data } = await axios.get('api/course')

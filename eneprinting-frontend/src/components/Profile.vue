@@ -6,23 +6,30 @@
           <v-text-field
             label='ชื่ออาจารย์'
             disabled
-            v-model='user.name'
+            v-model='user.profile.name'
           ></v-text-field>
         </v-flex>
         <v-flex md3>
           <v-text-field
             label='นามสกุลอาจารย์'
             disabled
-            v-model='user.surname'
+            v-model='user.profile.surname'
           ></v-text-field>
         </v-flex>
       </v-layout>
       <v-layout justify-center>
-        <v-flex md6>
+        <v-flex md4>
           <v-text-field
             label='E-mail'
             disabled
-            v-model='user.email'
+            v-model='user.profile.email'
+          ></v-text-field>
+        </v-flex>
+        <v-flex md2>
+          <v-text-field
+            label='Remain money'
+            disabled
+            v-model='user.remain_money'
           ></v-text-field>
         </v-flex>
       </v-layout>
