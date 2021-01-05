@@ -9,7 +9,7 @@
     "deploy": "yarn build && cp manifest.yml dist/ && cd dist && ibmcloud cf push"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^8.10.7",
     "vue": "^2.5.17",
